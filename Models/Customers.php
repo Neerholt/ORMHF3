@@ -1,13 +1,23 @@
 <?php
 
-class Customers
+require_once "Jsonable.php";
+
+class Customers extends Jsonable
 {
-    private int $customersId,$phone;
-    private string $name,$mail,$street;
+    public int $customersId,$phone;
+    public string $name,$mail,$street;
     /**
      * @var Orders[]
      */
     public array $orders;
+
+    public function __construct($name, $mail, $phone, $street)
+    {
+        $this->name = $name;
+        $this->mail = $mail;
+        $this->phone = $phone;
+        $this->street = $street;
+    }
 
     public function GetCustomersId(): int{
         return $this->customersId;
