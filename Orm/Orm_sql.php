@@ -26,7 +26,7 @@ class Orm_sql implements IOrm
         $stmt->execute();
 
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-            $customer = new Customers($row['firstname'],$row['lastname'],$row['mail'], $row['phone'], $row['street'] );
+            $customer = new Customers($row['firstname'],$row['lastname'],$row['mail'], $row['phone'], $row['street'], $row['password'] );
             array_push($customers, $customer);
         }
         return $customers;
@@ -51,13 +51,21 @@ class Orm_sql implements IOrm
 
     public function GetCustomer(int $id): Customers
     {
-        // TODO: Implement GetCustomer() method.
-        return 0;
+        $conn = $this->dbConn();
+        $stmt = $conn->prepare("SELECT ID, firstname, lastname, mail, phone, password, street FROM customer WHERE id = :id");
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return new Customers($row['firstname'],$row['lastname'],$row['mail'], $row['phone'], $row['street'], $row['password'] );
     }
 
-    public function UpdateCustomer(int $id): Customers
+    public function UpdateCustomer(Customers $customer): Customers
     {
-        // TODO: Implement UpdateCustomer() method.
+        $conn = $this->dbConn();
+        $stmt = $conn->prepare("UPDATE customer SET lastname='Doe' WHERE id = :id");
+
+
         return 0;
     }
 
