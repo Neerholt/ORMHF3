@@ -5,18 +5,20 @@ require_once "Jsonable.php";
 class Customers extends Jsonable
 {
     public int $customersId,$phone;
-    public string $name,$mail,$street;
+    public string $firstname, $lastname,$mail,$street, $password;
     /**
      * @var Orders[]
      */
     public array $orders;
 
-    public function __construct($name, $mail, $phone, $street)
+    public function __construct($name, $lastname, $mail, $phone, $street, $password)
     {
-        $this->name = $name;
+        $this->firstname = $name;
+        $this->lastname = $lastname;
         $this->mail = $mail;
         $this->phone = $phone;
         $this->street = $street;
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
     public function GetCustomersId(): int{
@@ -26,10 +28,10 @@ class Customers extends Jsonable
         $this->customersId = $id;
     }
     public function GetCustomersName(): string{
-        return $this->name;
+        return $this->firstname;
     }
     public function SetCustomersName($name): void{
-        $this->name = $name;
+        $this->firstname = $name;
     }
     public function GetCustomersMail(): string{
         return $this->mail;
@@ -48,6 +50,9 @@ class Customers extends Jsonable
     }
     public function SetCustomersPhone($phone): void{
         $this->phone = $phone;
+    }
+    public function SetCustomerPassword($password): string{
+        $this->password = $password;
     }
 }
 

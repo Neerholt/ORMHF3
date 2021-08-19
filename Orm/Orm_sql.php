@@ -26,16 +26,27 @@ class Orm_sql implements IOrm
         $stmt->execute();
 
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-            $customer = new Customers($row['name'],$row['mail'], $row['phone'], $row['street'] );
+            $customer = new Customers($row['firstname'],$row['lastname'],$row['mail'], $row['phone'], $row['street'] );
             array_push($customers, $customer);
         }
         return $customers;
     }
 
-    public function CreateCustomer(): Customers
+    public function CreateCustomer(Customers $customer): Customers
     {
-        // TODO: Implement CreateCustomer() method.
-        return 0;
+
+        $conn = $this->dbConn();
+        $stmt = $conn->prepare("INSERT INTO customer (firstname, lastname, mail, phone, password, street) VALUES (:firstname, :lastname, :mail, :phone, :password, :street)");
+        $stmt->BindParam(':firstname', $customer->firstname);
+        $stmt->BindParam(':lastname', $customer->lastname);
+        $stmt->BindParam(':mail', $customer->mail);
+        $stmt->BindParam(':phone', $customer->phone);
+        $stmt->BindParam(':password', $customer->password);
+        $stmt->BindParam(':street', $customer->street);
+        $stmt->execute();
+        $customer->customersId = $conn->lastInsertId();
+        return $customer;
+
     }
 
     public function GetCustomer(int $id): Customers
