@@ -1,6 +1,5 @@
 <?php
-
-require_once "Jsonable.php";
+namespace Models;
 
 class Customers extends Jsonable
 {
@@ -51,14 +50,9 @@ class Customers extends Jsonable
     public function SetCustomersPhone($phone): void{
         $this->phone = $phone;
     }
-    public function SetCustomerPassword($password): string{
+    public function SetCustomerPassword($password): void{
         $this->password = $password;
     }
 }
 
-/*
-$d = new Customers();
-$d->orders[0] = new Orders();
-$d->orders[0]->GetOrderAmount()
-*/
 

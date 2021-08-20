@@ -1,4 +1,7 @@
 <?php
+namespace Orm;
+
+use Models\Customers;
 
 interface IOrm{
     /**

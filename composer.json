@@ -1,0 +1,9 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Controller\\Customer\\": "Controller/Customer",
+      "Models\\": "Models/",
+      "Orm\\": "Orm/"
+    }
+  }
+}

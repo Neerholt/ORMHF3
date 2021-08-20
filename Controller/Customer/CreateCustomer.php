@@ -1,6 +1,10 @@
 <?php
 
-require_once "../Orm/Orm_sql.php";
+namespace Controller\Customer;
+use Models\Customers;
+use Orm\Orm_sql;
+require_once "../../vendor/autoload.php";
+
 header('Content-Type: application/json;charset=UTF-8');
 $sqlObject = new Orm_sql();
 //Data bliver send via frontend til denne backend file, som griper post request og sender det til vores Customer class, som vi så passer til vores

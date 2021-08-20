@@ -1,5 +1,5 @@
 <?php
-
+namespace Models;
 class Shippings
 {
     private $shippingId, $data, $status;

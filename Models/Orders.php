@@ -1,5 +1,6 @@
 <?php
 
+namespace Models;
 class Orders
 {
     private $ordersId,$date,$price,$amount;

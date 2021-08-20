@@ -1,7 +1,11 @@
 <?php
 
-require_once "IOrm.php";
-require_once "../Models/Customers.php";
+namespace Orm;
+
+
+use Models\Customers;
+use PDO;
+use PDOException;
 
 class Orm_sql implements IOrm
 {
