@@ -60,13 +60,20 @@ class Orm_sql implements IOrm
         return new Customers($row['firstname'],$row['lastname'],$row['mail'], $row['phone'], $row['street'], $row['password'] );
     }
 
-    public function UpdateCustomer(Customers $customer): Customers
+    public function UpdateCustomer(Customers $customer, $id): Customers
     {
         $conn = $this->dbConn();
-        $stmt = $conn->prepare("UPDATE customer SET lastname='Doe' WHERE id = :id");
+        $stmt = $conn->prepare("UPDATE customer SET firstname=:firstname, lastname=:lastname,mail=:mail, phone=:phone,street=:street, password=:password  WHERE id = :id");
+        $stmt->bindParam(':firstname', $customer->firstname);
+        $stmt->bindParam(':lastname',$customer->lastname);
+        $stmt->bindParam(':mail', $customer->mail);
+        $stmt->bindParam(':phone', $customer->phone);
+        $stmt->bindParam(':street', $customer->street);
+        $stmt->bindParam(':password', $customer->password);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
 
-
-        return 0;
+        return $customer;
     }
 
     public function DeleteCustomer(int $id): bool
