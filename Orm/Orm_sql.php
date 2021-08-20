@@ -78,7 +78,10 @@ class Orm_sql implements IOrm
 
     public function DeleteCustomer(int $id): bool
     {
-        // TODO: Implement DeleteCustomer() method.
+        $conn = $this->dbConn();
+        $stmt = $conn->prepare("DELETE FROM customer WHERE id=:id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
         return 0;
     }
 }
