@@ -4,24 +4,21 @@ namespace Models;
 
 class Customers extends Jsonable
 {
-    public int $customersId, $phone, $location_id;
+    public int $customersId, $phone;
     public string $firstname, $lastname, $mail, $street, $password;
     /**
      * @var Orders[]
      */
     public array $orders;
 
-    public function __construct($name, $lastname, $mail, $phone, $street, $password, $location_id)
+    public function __construct($name, $lastname, $mail, $phone, $street, $password)
     {
         $this->firstname = $name;
         $this->lastname = $lastname;
         $this->mail = $mail;
         $this->phone = $phone;
         $this->street = $street;
-        $this->location_id = $location_id;
         $this->password = password_hash($password, PASSWORD_DEFAULT);
-
-
     }
 
     public function GetCustomersId(): int

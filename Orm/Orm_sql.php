@@ -37,7 +37,7 @@ class Orm_sql implements IOrm
         return $customers;
     }
 
-    public function CreateCustomer(Customers $customer): Customers
+    public function CreateCustomer(Customers $customer, int $locationId): Customers
     {
 
         $conn = $this->dbConn();
@@ -48,7 +48,7 @@ class Orm_sql implements IOrm
         $stmt->bindParam(':phone', $customer->phone);
         $stmt->bindParam(':password', $customer->password);
         $stmt->bindParam(':street', $customer->street);
-        $stmt->bindParam(':location_id', $customer->location_id);
+        $stmt->bindParam(':location_id', $locationId);
         $stmt->execute();
         $customer->customersId = $conn->lastInsertId();
         return $customer;
