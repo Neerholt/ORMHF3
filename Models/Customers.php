@@ -4,7 +4,7 @@ namespace Models;
 
 class Customers extends Jsonable
 {
-    public int $customersId, $phone;
+    public int $id, $phone;
     public string $firstname, $lastname, $mail, $street, $password;
     /**
      * @var Orders[]
@@ -21,14 +21,14 @@ class Customers extends Jsonable
         $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
-    public function GetCustomersId(): int
+    public function GetId(): int
     {
-        return $this->customersId;
+        return $this->id;
     }
 
-    public function SetCustomersId($id): void
+    public function SetId($id): void
     {
-        $this->customersId = $id;
+        $this->id = $id;
     }
 
     public function GetCustomersName(): string
